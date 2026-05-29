@@ -1,9 +1,11 @@
 import Image from "next/image";
-/*import Hero from "./components/Hero";*/
+import Hero from "./components/ternario";
 import GridPersonas from "./components/GridPersonas"
+import Ternario from "./components/ternario";
+
 export default function Home() {
   
-  return (<GridPersonas/>);
+  return (<Hero/>);
 }
 
 
