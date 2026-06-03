@@ -2,6 +2,22 @@
 import { Button } from "@/components/ui/button"
 import {useState} from "react";
 import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
 type Tarea={
     id:number,
     titulo: string,
@@ -13,10 +29,15 @@ export default function Tablon(){
     const [titulo, setTitulo] = useState("")//título que empieza vacío
     const [descripcion, setDescripcion] = useState("")//descripción qiue empieza vacío
     const [tarea, setTareas] = useState<Tarea[]>([])//array tareas creadas que empieza vacío
+    const [advertencia,setAdvert]=useState(false)
+    const [vacio,setvacio]=useState(true)
     function anadirTarea() {
         if (titulo.trim() === "" || descripcion.trim() === "") {
+            setAdvert(true)
             return
         }
+        setvacio(false)
+        setAdvert(false)
         const nuevaTarea: Tarea={
             id: Date.now(),
             titulo: titulo.trim(),
@@ -28,20 +49,38 @@ export default function Tablon(){
         setTitulo("")
         setDescripcion("")
     }
-
-    return(<div className="p-2">
-        <div className="flex flex-col">
-            <Input className="max-w-70" value={titulo} placeholder="Escribe un título" onChange={e => setTitulo(e.target.value)}></Input>
-            <textarea value={descripcion} placeholder="Escribe una descripción" onChange={e => setDescripcion(e.target.value)}></textarea>
-            <Button  className="max-w-30" onClick={anadirTarea}>Nueva Tarea</Button>
-        </div>
-        <div>
-            <div>{tarea.map((tarea) => (
-            <div key={tarea.id}>
-                <h2>{tarea.titulo}</h2>
-                <p>{tarea.descripcion}</p>
+    //#00786f
+    return(<div className="pl-3 flex flex-row min-h-screen bg-teal-100">
+        <div className=" w-100">
+            <h1 className="p-1 pt-4 text-2xl font-bold text-teal-600">Gestor de tareas</h1>
+            <div>
+                <Input className="max-w-70 m-1 bg-white" value={titulo} placeholder="Escribe un título" onChange={e => setTitulo(e.target.value)}></Input>
+                <Textarea className="max-w-90 m-1 bg-gray-200" value={descripcion} placeholder="Escribe una descripción" onChange={e => setDescripcion(e.target.value)}></Textarea>
+                
+                <Button  className="max-w-30 m-1" onClick={anadirTarea}>Nueva Tarea</Button>
+                <Alert variant="destructive" className={`max-w-md border-0 ${advertencia ? 'block' : 'hidden'}`}>
+                    <AlertTitle>No puedes dejar ningún campo vacío</AlertTitle>
+                </Alert>
             </div>
-        ))}</div>
+        </div>
+
+        <div className="bg-cyan-800">
+            <div >
+            <Alert variant="destructive" className={`max-w-md border-0 ${vacio ? 'block' : 'hidden'}`}>
+                <AlertTitle className="text-black">Todavía no tienes tareas</AlertTitle>
+            </Alert>
+            </div>
+            <div >{tarea.map((tarea) => (
+                <div key={tarea.id}>
+                <Card className="min-w-50 m-3 p-4 pl-4 h-auto">
+                    <div >
+                        <CardTitle pl-1>{tarea.titulo}</CardTitle>
+                        <Textarea  id="textarea-disabled" disabled className="cursor-pointer">{tarea.descripcion}</Textarea>
+                        
+                    </div>
+                </Card>
+                </div>
+            ))}</div>
         </div>
     </div>)
 }
