@@ -1,11 +1,12 @@
 import Image from "next/image";
-import Hero from "./components/ternario";
-import GridPersonas from "./components/GridPersonas"
-import Ternario from "./components/ternario";
-import tarea from "./components/tarea"
+//import Hero from "./components/otrosProyectos/ternario";
+import GridPersonas from "./components/otrosProyectos/GridPersonas"
+import Ternario from "./components/otrosProyectos/ternario";
+//import tarea from "./components/tarea"
 export default function Home() {
+  <p>Hola</p>
   
-  return (<tarea/>);
+  return (<Hero></Hero>);
 }
 
 
