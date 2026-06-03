@@ -1,4 +1,4 @@
-import GridPErsonas from "./GridPersonas";
+import GridPrsonas from "./GridPersonas";
 type GridPersonas={
         nombre:string,
         edad:number,
