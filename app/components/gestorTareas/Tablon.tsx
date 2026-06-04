@@ -51,28 +51,28 @@ export default function Tablon(){
     }
     //#00786f
     return(<div className="pl-3 flex flex-row min-h-screen bg-teal-100">
-        <div className=" w-100">
-            <h1 className="p-1 pt-4 text-2xl font-bold text-teal-600">Gestor de tareas</h1>
+        <div className=" min-w-1/2">
+            <h1 className="p-1 ml-10 pt-4 text-2xl font-bold text-teal-600">Gestor de tareas básico</h1>
             <div>
-                <Input className="max-w-70 m-1 bg-white" value={titulo} placeholder="Escribe un título" onChange={e => setTitulo(e.target.value)}></Input>
-                <Textarea className="max-w-90 m-1 bg-gray-200" value={descripcion} placeholder="Escribe una descripción" onChange={e => setDescripcion(e.target.value)}></Textarea>
+                <Input className="max-w-70 m-1 ml-10 bg-white" value={titulo} placeholder="Escribe un título" onChange={e => setTitulo(e.target.value)}></Input>
+                <Textarea className="max-w-90 m-1 ml-10 bg-gray-200" value={descripcion} placeholder="Escribe una descripción" onChange={e => setDescripcion(e.target.value)}></Textarea>
                 
-                <Button  className="max-w-30 m-1" onClick={anadirTarea}>Nueva Tarea</Button>
-                <Alert variant="destructive" className={`max-w-md border-0 ${advertencia ? 'block' : 'hidden'}`}>
+                <Button  className="max-w-30 m-1 ml-10" onClick={anadirTarea}>Nueva Tarea</Button>
+                <Alert variant="destructive" className={`max-w-md ml-10 border-0 ${advertencia ? 'block' : 'hidden'}`}>
                     <AlertTitle>No puedes dejar ningún campo vacío</AlertTitle>
                 </Alert>
             </div>
         </div>
 
-        <div className="bg-cyan-800">
-            <div >
-            <Alert variant="destructive" className={`max-w-md border-0 ${vacio ? 'block' : 'hidden'}`}>
-                <AlertTitle className="text-black">Todavía no tienes tareas</AlertTitle>
+        <div className="bg-cyan-800 min-w-1/2 flex justify-center">
+            <div>
+            <Alert variant="destructive" className={`max-w-md border-0 bg-transparent ${vacio ? 'block' : 'hidden'}`}>
+                <AlertTitle className="text-white bg-transparent text-center text-lg">Todavía no tienes tareas</AlertTitle>
             </Alert>
             </div>
             <div >{tarea.map((tarea) => (
                 <div key={tarea.id}>
-                <Card className="min-w-50 m-3 p-4 pl-4 h-auto">
+                <Card className="min-w-50  m-3 p-4 pl-4 h-auto">
                     <div >
                         <CardTitle pl-1>{tarea.titulo}</CardTitle>
                         <Textarea  id="textarea-disabled" disabled className="cursor-pointer">{tarea.descripcion}</Textarea>
