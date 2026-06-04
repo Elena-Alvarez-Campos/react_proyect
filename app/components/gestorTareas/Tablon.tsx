@@ -5,17 +5,6 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
 
 import {
   Card,
@@ -63,9 +52,6 @@ export default function Tablon(){
         setTitulo("")
         setDescripcion("")
     }
-    function eliminarTarea(){
-        setTareas(tarea.filter((tarea) => tarea.id !== id))
-    }
     //#00786f
     return(<div className="pl-3 flex flex-row min-h-screen bg-teal-100">
         <div className=" min-w-1/2">
@@ -92,29 +78,12 @@ export default function Tablon(){
             <div >{tarea.map((tarea) => (
                 <div key={tarea.id}>
                 <Card className="min-w-50  m-3 p-4 pl-4 h-auto">
-                    <div >
+                    <div>
                         <CardTitle pl-1>{tarea.titulo}</CardTitle>
                         <Textarea  id="textarea-disabled" disabled className="cursor-pointer">{tarea.descripcion}</Textarea>
                         <div className="flex flex-row">
                             <Switch id="completado" className="m-2" /><Label className="pl-2">Completado</Label>
                         </div>
-                        <AlertDialog>
-                            <AlertDialogTrigger asChild>
-                                <Button className="max-w-30">Borrar</Button>
-                            </AlertDialogTrigger>
-                            <AlertDialogContent>
-                                <AlertDialogHeader>
-                                    <AlertDialogTitle>¿Quieres borrar esta tarea?</AlertDialogTitle>
-                                    <AlertDialogDescription>
-                                        Una vez que la elimines no la puedes recuperar.
-                                    </AlertDialogDescription>
-                                </AlertDialogHeader>
-                                <AlertDialogFooter>
-                                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                                    <AlertDialogAction onClick={() => eliminarTarea(tarea.id)}>Borrar</AlertDialogAction>
-                                </AlertDialogFooter>
-                            </AlertDialogContent>
-                        </AlertDialog>
                     </div>
                 </Card>
                 </div>
