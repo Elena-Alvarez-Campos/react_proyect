@@ -3,6 +3,20 @@ import { Button } from "@/components/ui/button"
 import {useState} from "react";
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 import {
   Card,
   CardAction,
@@ -49,6 +63,9 @@ export default function Tablon(){
         setTitulo("")
         setDescripcion("")
     }
+    function eliminarTarea(){
+        setTareas(tarea.filter((tarea) => tarea.id !== id))
+    }
     //#00786f
     return(<div className="pl-3 flex flex-row min-h-screen bg-teal-100">
         <div className=" min-w-1/2">
@@ -58,9 +75,11 @@ export default function Tablon(){
                 <Textarea className="max-w-90 m-1 ml-10 bg-gray-200" value={descripcion} placeholder="Escribe una descripción" onChange={e => setDescripcion(e.target.value)}></Textarea>
                 
                 <Button  className="max-w-30 m-1 ml-10" onClick={anadirTarea}>Nueva Tarea</Button>
+                <p className="p-1 ml-10 pb-3 text-s font-bold text-teal-600">Total de tareas: {tarea.length}</p>
                 <Alert variant="destructive" className={`max-w-md ml-10 border-0 ${advertencia ? 'block' : 'hidden'}`}>
                     <AlertTitle>No puedes dejar ningún campo vacío</AlertTitle>
                 </Alert>
+                
             </div>
         </div>
 
@@ -76,7 +95,26 @@ export default function Tablon(){
                     <div >
                         <CardTitle pl-1>{tarea.titulo}</CardTitle>
                         <Textarea  id="textarea-disabled" disabled className="cursor-pointer">{tarea.descripcion}</Textarea>
-                        
+                        <div className="flex flex-row">
+                            <Switch id="completado" className="m-2" /><Label className="pl-2">Completado</Label>
+                        </div>
+                        <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                                <Button className="max-w-30">Borrar</Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>¿Quieres borrar esta tarea?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        Una vez que la elimines no la puedes recuperar.
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                                    <AlertDialogAction onClick={() => eliminarTarea(tarea.id)}>Borrar</AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                     </div>
                 </Card>
                 </div>
