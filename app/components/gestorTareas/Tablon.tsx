@@ -30,13 +30,6 @@ type Tarea={
 
 
 export default async function Tablon(){
-    /*
-    const [titulo, setTitulo] = useState("")//título que empieza vacío
-    const [descripcion, setDescripcion] = useState("")//descripción qiue empieza vacío
-    const [tarea, setTareas] = useState<Tarea[]>([])//array tareas creadas que empieza vacío
-    const [advertencia,setAdvert]=useState(false)
-    const [vacio,setvacio]=useState(true)
-    */
    
     const tareas = await obtenerTareas()
     async function anadirTarea(formData: FormData) {
@@ -52,39 +45,6 @@ export default async function Tablon(){
         await insertarTarea(titulo.trim(), descripcion.trim())
         revalidatePath("/gestorTareas")
 
-        /*
-        async function anadirTarea(formData: FormData) {
-        const titulo = formData.get("titulo")
-        const descripcion = formData.get("descripcion")
-        if (typeof titulo !== "string" || typeof descripcion !== "string") {
-            return
-        }
-        if (titulo.trim() === "" || descripcion.trim() === "") {
-            return
-        }
-        await insertarTarea(titulo.trim(), descripcion.trim())
-
-        revalidatePath("/gestorTareas")
-        }
-        */
-        /*
-        if (titulo.trim() === "" || descripcion.trim() === "") {
-            setAdvert(true)
-            return
-        }
-        setvacio(false)
-        setAdvert(false)
-        const nuevaTarea: Tarea={
-            id: Date.now(),
-            titulo: titulo.trim(),
-            descripcion: descripcion.trim(),
-        }
-        //let nuevaTarea=<Tareas id={Date.now()} titulo={titulo.trim()} descripcion={descripcion.trim()}></Tareas>
-        
-        setTareas([...tarea,nuevaTarea]);
-        setTitulo("")
-        setDescripcion("")
-        */
     }
         
     //#00786f
