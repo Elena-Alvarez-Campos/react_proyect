@@ -35,6 +35,7 @@ type Tarea={
 export default async function Tablon(){
     const tareas = await obtenerTareas()
     async function crearTarea(formData: FormData) {
+        "use server"
         const titulo = formData.get("titulo")
         const descripcion = formData.get("descripcion")
         if (typeof titulo !== "string" || typeof descripcion !== "string") {
